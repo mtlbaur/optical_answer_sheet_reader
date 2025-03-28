@@ -1,0 +1,26 @@
+# ignore everything in the root directory by default
+/*
+
+# ignore files anywhere in the tree that match specified patterns
+**/__pycache__
+**/*.pyc
+**/*.egg-info
+**/*.drawio
+
+# include specific root files
+!.gitignore
+!LICENSE.txt
+!README.md
+
+# include specific root folders
+!src
+!test
+!rel
+!form
+
+# ignore everything in form
+/form/*
+
+# include specific files in form
+!/form/oasr-f5.pdf
+!/form/test1.pdf
