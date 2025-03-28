@@ -41,7 +41,7 @@ Fields 1-3 are generic so as to allow a wide variety of uses.
 
         2. Greatly speed up subsequent processing of the same test scan. Note: because the test data is read directly from the data structure, the scan-reading part is skipped entirely. This means that any changes to settings related to this reading have no effect, e.g.: DPI, rotation, and darkness threshold.
 
-    - Change the DPI to match the PDF's DPI.
+    - Change the DPI to match the scanner's DPI.
 
     - Change the base rotation in degrees of all pages within the PDF (in case the scanner oriented them horizontally or even up-side-down).
 
@@ -69,7 +69,7 @@ This program relies on Python and Poppler being installed. Poppler is used to ex
 
 - Add the `.../poppler-VERSION/Library/bin` path to the Windows environment variable `Path`.
 
-- Download/extract the newest release located in `./rel` of this repo and navigate to the `./rel/dist` subfolder.
+- Download/extract the newest release located in `./rel` of this repo and navigate to the `./dist` subfolder.
 
 - Execute `pip install ./oasr-VERSION-py2.py3-none-any.whl`.
 
@@ -77,7 +77,7 @@ This program relies on Python and Poppler being installed. Poppler is used to ex
 
 ## Updating
 
-- Download/extract the newest release located in `./rel` of this repo and navigate to the `./rel/dist` subfolder.
+- Download/extract the newest release located in `./rel` of this repo and navigate to the `./dist` subfolder.
 
 - Execute `pip install --upgrade ./oasr-VERSION-py2.py3-none-any.whl`.
 
