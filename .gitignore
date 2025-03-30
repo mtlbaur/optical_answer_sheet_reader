@@ -16,7 +16,9 @@
 !src
 !test
 !rel
+!dist
 !form
+!start
 
 # ignore everything in form
 /form/*

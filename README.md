@@ -24,8 +24,14 @@ Fields 1-3 are generic so as to allow a wide variety of uses.
 - Scan the stack of copies and save it as a PDF (a scan precision of 300 DPI is known to to be sufficient).
 
 - Launch the OASR program from anywhere via the `./start/oasr_start.py` script.
+    - Wherever this script is executed, two folders will be created in the enclosing directory:
+        1. `cfg` for config files. To perform a hard-reset of all settings without having to use the built-in Default button on the GUI, delete this file.
 
-- Fill in the Infile Path field with the path of PDF via the "Select" button.
+        2. `out` for output files.
+
+    - Both of these directories and their contents are written without prompt even in the case of name conflicts.
+
+- Fill in the Infile Path field with the path of the PDF via the "Select" button.
 
 - Optionally:
     - Generate/fill in a Outfile Name.
@@ -57,8 +63,6 @@ Fields 1-3 are generic so as to allow a wide variety of uses.
 
 - Execution can take several minutes depending on the processing capability of the computer and the number of pages in the PDF.
 
-- The configuration of settings is automatically saved to `./cfg/oasr.cfg`. To perform a hard-reset of all settings without having to use the built-in Default button on the GUI, delete this file.
-
 ## Installation
 
 This program relies on Python and Poppler being installed. Poppler is used to extract images from the PDF scans.
@@ -69,7 +73,7 @@ This program relies on Python and Poppler being installed. Poppler is used to ex
 
 - Add the `.../poppler-VERSION/Library/bin` path to the Windows environment variable `Path`.
 
-- Download/extract the newest release located in `./rel` of this repo and navigate to the `./dist` subfolder.
+- Download/extract the contents of this repo and open the `./dist` subfolder in command line.
 
 - Execute `pip install ./oasr-VERSION-py2.py3-none-any.whl`.
 
@@ -77,13 +81,13 @@ This program relies on Python and Poppler being installed. Poppler is used to ex
 
 ## Updating
 
-- Download/extract the newest release located in `./rel` of this repo and navigate to the `./dist` subfolder.
+- Download/extract the contents of this repo and open the `./dist` subfolder in command line.
 
 - Execute `pip install --upgrade ./oasr-VERSION-py2.py3-none-any.whl`.
 
 ## Uninstallation
 
-- Execute `pip uninstall oasr`.
+- Launch command line and execute `pip uninstall oasr`.
 
 - Remove the `.../poppler-VERSION/Library/bin` path from the Windows environment variable `Path`.
 
