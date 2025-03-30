@@ -15,7 +15,6 @@
 # include specific root folders
 !src
 !test
-!rel
 !dist
 !form
 !start
