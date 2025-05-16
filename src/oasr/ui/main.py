@@ -104,7 +104,7 @@ def init():
 
         rotation.value = 0.0
         dpi.value = 300.0
-        darkness.value = 96.0
+        darkness.value = 128.0
         theme.value = 0.0
         theme_change_f(theme.value)
 
@@ -185,7 +185,7 @@ def init():
 
     dpi = ui.Slider(value=300, label="{value} DPI", min=100, max=1000, divisions=9)
     rotation = ui.Slider(value=0, label="{value}° Rotation", min=-180, max=180, divisions=4)
-    darkness = ui.Slider(value=96, label="{value} Darkness Threshold", min=0, max=255, divisions=16)
+    darkness = ui.Slider(value=128, label="{value} Darkness Threshold", min=0, max=255, divisions=16)
     theme = ui.Slider(value=0, min=0, max=2, divisions=2, on_change=theme_change_cb)
 
     write = ui.Checkbox(label="Write", value=True)
@@ -195,7 +195,7 @@ def init():
 
     plot = ui.Checkbox(label="Plot")
     debug = ui.Checkbox(label="Debug")
-    auto_open_outpath = ui.Checkbox("Open Outpath")
+    auto_open_outpath = ui.Checkbox("Open Outpath", value=True)
 
     write_cache = ui.Checkbox(label="Write Cache")
     load_cache = ui.Checkbox(label="Load Cache")
