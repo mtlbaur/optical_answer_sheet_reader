@@ -57,11 +57,10 @@ def record_response(responses, question_num, response_category, response):
     response = "".join(response)
 
     if question_num in responses:
-        if response in responses[question_num]:
-            responses[question_num][response][response_category] += 1
-        else:
+        if response not in responses[question_num]:
             responses[question_num][response] = get_categories()
-            responses[question_num][response][response_category] += 1
+
+        responses[question_num][response][response_category] += 1
     else:
         responses[question_num] = get_responses()
         responses[question_num][response][response_category] = 1

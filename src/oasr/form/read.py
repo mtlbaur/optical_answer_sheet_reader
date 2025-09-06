@@ -14,6 +14,7 @@ from . import cache
 
 
 def read(
+    *,
     infile_path="",
     cache_path="",
     outfile_name="",
@@ -25,9 +26,12 @@ def read(
     open_outpath_enabled=False,
     write_cache=False,
     load_cache=False,
-    dpi=300.0,
-    degrees_rotation=0.0,
-    darkness_threshold=128,
+    mark_pos_rel_tol,
+    mark_area_rel_tol,
+    rotated_mark_pos_rel_tol,
+    dpi,
+    degrees_rotation,
+    darkness_threshold,
 ):
     runtime = 0
 
@@ -45,7 +49,15 @@ def read(
     data = None
 
     if not load_cache:
-        data = extract(infile_path.as_posix(), dpi=dpi, degrees_rotation=degrees_rotation, darkness_threshold=darkness_threshold)
+        data = extract(
+            path=infile_path.as_posix(),
+            mark_pos_rel_tol=mark_pos_rel_tol,
+            mark_area_rel_tol=mark_area_rel_tol,
+            rotated_mark_pos_rel_tol=rotated_mark_pos_rel_tol,
+            dpi=dpi,
+            degrees_rotation=degrees_rotation,
+            darkness_threshold=darkness_threshold,
+        )
     else:
         if cache_path == "":
             data = cache.load(Path(f"./{cfg.outpath}/{infile_path.stem}_cache.txt").as_posix())

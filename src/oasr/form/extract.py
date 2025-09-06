@@ -23,14 +23,17 @@ from oasr.form import form
 lmark_count = 46
 bmark_count = 43
 
-mark_pos_rel_tol = 0.25  # 0.2 worked before, being more generous now since we can correct slightly rotated pages
-mark_area_rel_tol = 0.2  # less than 0.2 is probably not a good idea
 
-rotated_mark_pos_rel_tol = 0.01  # this might be too low
-rotated_mark_area_rel_tol = 0.2  # less than 0.2 is probably not a good idea
-
-
-def extract(path, dpi=300, degrees_rotation=0, darkness_threshold=128):
+def extract(
+    *,
+    path,
+    mark_pos_rel_tol,
+    mark_area_rel_tol,
+    rotated_mark_pos_rel_tol,
+    dpi,
+    degrees_rotation,
+    darkness_threshold,
+):
     trace("extract")
 
     min_contour_area = dpi * 1.5
@@ -150,8 +153,8 @@ def extract(path, dpi=300, degrees_rotation=0, darkness_threshold=128):
                     plt.imshow(rotated_image)
 
                 marks = find_marks(rotated_image, min_contour_area, max_contour_area, darkness_threshold)
-                lmarks = find_matching_edge_marks(marks, "l", lmark_count, "contour_area", rotated_mark_pos_rel_tol, rotated_mark_area_rel_tol)
-                bmarks = find_matching_edge_marks(marks, "b", bmark_count, "contour_area", rotated_mark_pos_rel_tol, rotated_mark_area_rel_tol)
+                lmarks = find_matching_edge_marks(marks, "l", lmark_count, "contour_area", rotated_mark_pos_rel_tol, mark_area_rel_tol)
+                bmarks = find_matching_edge_marks(marks, "b", bmark_count, "contour_area", rotated_mark_pos_rel_tol, mark_area_rel_tol)
 
                 if len(lmarks) != lmark_count or len(bmarks) != bmark_count:
                     table = []

@@ -57,6 +57,15 @@ def init():
 
             return sorted(indexes)
 
+        def get_text_field_number(tf, default):
+            try:
+                return float(tf.value)
+
+            except Exception as e:
+                logging.error(format_exception(e))
+
+                return default
+
         manager.execute(
             {
                 "function": read,
@@ -72,6 +81,9 @@ def init():
                     "open_outpath_enabled": auto_open_outpath.value,
                     "write_cache": write_cache.value,
                     "load_cache": load_cache.value,
+                    "mark_pos_rel_tol": get_text_field_number(mark_pos_rel_tol, cfg.mark_pos_rel_tol),
+                    "mark_area_rel_tol": get_text_field_number(mark_area_rel_tol, cfg.mark_area_rel_tol),
+                    "rotated_mark_pos_rel_tol": get_text_field_number(rotated_mark_pos_rel_tol, cfg.rotated_mark_pos_rel_tol),
                     "dpi": dpi.value,
                     "degrees_rotation": rotation.value,
                     "darkness_threshold": darkness.value,
@@ -102,9 +114,13 @@ def init():
         for c in [plot, debug, write_cache, load_cache]:
             c.value = False
 
-        rotation.value = 0.0
-        dpi.value = 300.0
-        darkness.value = 128.0
+        mark_pos_rel_tol.value = cfg.mark_pos_rel_tol
+        mark_area_rel_tol.value = cfg.mark_area_rel_tol
+        rotated_mark_pos_rel_tol.value = cfg.rotated_mark_pos_rel_tol
+
+        dpi.value = cfg.dpi
+        rotation.value = cfg.degrees_rotation
+        darkness.value = cfg.darkness_threshold
         theme.value = 0.0
         theme_change_f(theme.value)
 
@@ -183,9 +199,13 @@ def init():
     outfile_name = ui.TextField(label="Outfile Name", expand=True)
     debug_form_indexes = ui.TextField(label="Debug Form Indexes", expand=True)
 
-    dpi = ui.Slider(value=300, label="{value} DPI", min=100, max=1000, divisions=9)
-    rotation = ui.Slider(value=0, label="{value}° Rotation", min=-180, max=180, divisions=4)
-    darkness = ui.Slider(value=128, label="{value} Darkness Threshold", min=0, max=255, divisions=16)
+    mark_pos_rel_tol = ui.TextField(value=cfg.mark_pos_rel_tol, label="Mark Position Relative Tolerance", multiline=False)
+    mark_area_rel_tol = ui.TextField(value=cfg.mark_area_rel_tol, label="Mark Area Relative Tolerance", multiline=False)
+    rotated_mark_pos_rel_tol = ui.TextField(value=cfg.rotated_mark_pos_rel_tol, label="Rotated Mark Position Relative Tolerance", multiline=False)
+
+    dpi = ui.Slider(value=cfg.dpi, label="{value} DPI", min=100, max=1000, divisions=9)
+    rotation = ui.Slider(value=cfg.degrees_rotation, label="{value}° Rotation", min=-180, max=180, divisions=4)
+    darkness = ui.Slider(value=cfg.darkness_threshold, label="{value} Darkness Threshold", min=0, max=255, divisions=16)
     theme = ui.Slider(value=0, min=0, max=2, divisions=2, on_change=theme_change_cb)
 
     write = ui.Checkbox(label="Write", value=True)
@@ -227,6 +247,10 @@ def init():
         "cache_path": cache_path,
         "outfile_name": outfile_name,
         "debug_form_indexes": debug_form_indexes,
+        #
+        "mark_pos_rel_tol": mark_pos_rel_tol,
+        "mark_area_rel_tol": mark_area_rel_tol,
+        "rotated_mark_pos_rel_tol": rotated_mark_pos_rel_tol,
         #
         "dpi": dpi,
         "rotation": rotation,
@@ -298,10 +322,13 @@ def init():
                             ui.Row([write_cache, load_cache]),
                             ui.Row([clear_fields, clear_log, reset_options]),
                             ui.Row([start, stop, open_outpath]),
-                            ui.Row([dpi]),
-                            ui.Row([rotation]),
-                            ui.Row([darkness]),
-                            ui.Row([theme]),
+                            ui.Row([mark_pos_rel_tol]),
+                            ui.Row([mark_area_rel_tol]),
+                            ui.Row([rotated_mark_pos_rel_tol]),
+                            ui.Row([dpi, ui.Text("DPI")]),
+                            ui.Row([rotation, ui.Text("Rotation")]),
+                            ui.Row([darkness, ui.Text("Darkness")]),
+                            ui.Row([theme, ui.Text("Theme")]),
                         ],
                     ),
                 ],

@@ -7,7 +7,17 @@ def test_test1():
     from oasr.form.extract import extract
     from oasr.form.process import process
 
-    results = process(extract("./form/test1.pdf"))
+    results = process(
+        extract(
+            path="./form/test1.pdf",
+            mark_pos_rel_tol=cfg.mark_pos_rel_tol,
+            mark_area_rel_tol=cfg.mark_area_rel_tol,
+            rotated_mark_pos_rel_tol=cfg.rotated_mark_pos_rel_tol,
+            dpi=cfg.dpi,
+            degrees_rotation=cfg.degrees_rotation,
+            darkness_threshold=cfg.darkness_threshold,
+        )
+    )
 
     scores = results["scores"]
 
